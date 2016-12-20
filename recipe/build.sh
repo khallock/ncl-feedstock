@@ -33,8 +33,21 @@ sed -e "s|/usr/bin/cpp|${PREFIX}/bin/cpp|g" -i.backup ${conf_file}
 
 sed -e "s|\${PREFIX}|${PREFIX}|g" -e "s|\${x11_inc}|${x11_inc}|g" -e "s|\${x11_lib}|${x11_lib}|g" "${RECIPE_DIR}/Site.local.template" > config/Site.local
 
+sed -e "s|^\(SUBDIRS = blas lapack sphere3.1_dp  fftpack5_dp\)$|\1 g2clib-1.5.0|g" -i.backup external/yMakefile
+
+sed -e "s|^INC=-I/usr/local/include.*$|INC=-I$PREFIX/include/|g" -i.backup external/g2clib-1.5.0/makefile
+
+echo -e '
+install:
+	cp -p libgrib2c.a $(PREFIX)/lib/.
+	cp -p grib2.h $(PREFIX)/include/.
+' >> external/g2clib-1.5.0/makefile
+
 echo -e "n\n" | ./Configure
 make Everything
+
+cp -p external/g2clib-1.5.0/libgrib2c.a $PREFIX/lib/.
+cp -p external/g2clib-1.5.0/grib2.h $PREFIX/include/.
 
 ACTIVATE_DIR="$PREFIX/etc/conda/activate.d"
 DEACTIVATE_DIR="$PREFIX/etc/conda/deactivate.d"
