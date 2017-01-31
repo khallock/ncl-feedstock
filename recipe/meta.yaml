@@ -1,7 +1,7 @@
 {% set ver = "6.4.0" %}
-{% set beta = "beta20161122" %}
+{% set beta = "beta20160131" %}
 {% set version = ver + "_" + beta %}
-{% set commit = "0e8923c64f2f5449944435cf5a75530357b7c0ab" %}
+{% set commit = "35a53e928fb7e3154d78424f1097cc7481cdec91" %}
 
 package:
     name: ncl
