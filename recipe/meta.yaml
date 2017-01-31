@@ -10,7 +10,7 @@ package:
 source:
     fn: {{ commit }}.tar.gz
     url: https://github.com/NCAR/ncl/archive/{{ commit }}.tar.gz
-    sha256: d2cd8a1de1c498c1832f0765113ad58086d1d3b29bf5d2cc9b1ba60f1919951c
+    sha256: 5f40adaeed663cdc3a013013a8c148639f8533643b3a4a8414c74b44558e8276
 
 build:
     number: 0
