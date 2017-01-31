@@ -20,6 +20,9 @@ elif [ "$(uname)" = "Linux" ]; then
     conf_file=config/LINUX
 fi
 
+# fix version string
+sed -e "s/^\(#define Nc.*Version\).*$/\1 ${PKG_VERSION}/" -i.backup config/Project
+
 mkdir triangle_tmp && cd triangle_tmp && curl -q http://www.netlib.org/voronoi/triangle.shar | sh && mv triangle.? ../ni/src/lib/hlu/. && cd -
 
 # fix path to cpp in ymake -- we should fix this in NCL
