@@ -69,7 +69,7 @@ requirements:
 test:
     commands:
         - test "$(ncl -V)" = "{{ version }}"
-        - NCARG_ROOT=${PREFIX} ${SRC_DIR}/install/make-tarfile/check_files | grep -qv '^<'
+        - NCARG_ROOT=${PREFIX} ${RECIPE_DIR}/check_files | grep -qv '^<'
 
 about:
     home: http://ncl.ucar.edu/
