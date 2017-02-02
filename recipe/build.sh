@@ -23,6 +23,10 @@ fi
 # fix version string
 sed -e "s/^\(#define Nc.*Version\).*$/\1 ${PKG_VERSION}/" -i.backup config/Project
 
+G2CLIB=g2clib-1.5.0
+
+mkdir triangle_tmp && cd triangle_tmp && curl -q http://www.netlib.org/voronoi/triangle.shar | sh && mv triangle.? ../ni/src/lib/hlu/. && cd -
+
 mkdir triangle_tmp && cd triangle_tmp && curl -q http://www.netlib.org/voronoi/triangle.shar | sh && mv triangle.? ../ni/src/lib/hlu/. && cd -
 
 # fix path to cpp in ymake -- we should fix this in NCL
@@ -33,8 +37,23 @@ sed -e "s|/usr/bin/cpp|${PREFIX}/bin/cpp|g" -i.backup ${conf_file}
 
 sed -e "s|\${PREFIX}|${PREFIX}|g" -e "s|\${x11_inc}|${x11_inc}|g" -e "s|\${x11_lib}|${x11_lib}|g" "${RECIPE_DIR}/Site.local.template" > config/Site.local
 
+sed -e "s|^\(SUBDIRS = blas lapack sphere3.1_dp  fftpack5_dp\)$|\1 $G2CLIB|g" -i.backup external/yMakefile
+
+sed -e "s|^INC=-I/usr/local/include.*$|INC=-I$PREFIX/include/|g" -i.backup external/$G2CLIB/makefile
+
+sed -e "|bin/ESMF_RegridWeightGen|d" -i.backup install/make-tarfile/check_files
+
+echo -e '
+install:
+	cp -p libgrib2c.a $(PREFIX)/lib/.
+	cp -p grib2.h $(PREFIX)/include/.
+' >> external/$G2CLIB/makefile
+
 echo -e "n\n" | ./Configure
 make Everything
+
+cp -p external/$G2CLIB/libgrib2c.a $PREFIX/lib/.
+cp -p external/$G2CLIB/grib2.h $PREFIX/include/.
 
 ACTIVATE_DIR="$PREFIX/etc/conda/activate.d"
 DEACTIVATE_DIR="$PREFIX/etc/conda/deactivate.d"
