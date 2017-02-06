@@ -1,7 +1,7 @@
 {% set ver = "6.4.0" %}
-{% set beta = "beta20170201" %}
+{% set beta = "beta20170206" %}
 {% set version = ver + "_" + beta %}
-{% set commit = "9770f886f09b9771d13dc6d3cc80ff2afa368890" %}
+{% set commit = "e9cc11fcb96538479404054c88c4008031916458" %}
 
 package:
     name: ncl
@@ -10,7 +10,7 @@ package:
 source:
     fn: {{ commit }}.tar.gz
     url: https://github.com/NCAR/ncl/archive/{{ commit }}.tar.gz
-    sha256: 2696f5d07e921402c063cfa75be9998f6c8f13d834cf7067efdd69b2b09e4f10
+    sha256: cb23cc81775bf62b7085776206aea9c873ab2767d3b4fac10988a9a9d85a50f6
 
 build:
     number: 0
