@@ -23,7 +23,7 @@ fi
 # fix version string
 sed -e "s/^\(#define Nc.*Version\).*$/\1 ${PKG_VERSION}/" -i.backup config/Project
 
-G2CLIB=g2clib-1.5.0
+G2CLIB=g2clib-1.6.0
 
 mkdir triangle_tmp && cd triangle_tmp && curl -q http://www.netlib.org/voronoi/triangle.shar | sh && mv triangle.? ../ni/src/lib/hlu/. && cd -
 
