@@ -27,8 +27,6 @@ G2CLIB=g2clib-1.6.0
 
 mkdir triangle_tmp && cd triangle_tmp && curl -q http://www.netlib.org/voronoi/triangle.shar | sh && mv triangle.? ../ni/src/lib/hlu/. && cd -
 
-mkdir triangle_tmp && cd triangle_tmp && curl -q http://www.netlib.org/voronoi/triangle.shar | sh && mv triangle.? ../ni/src/lib/hlu/. && cd -
-
 # fix path to cpp in ymake -- we should fix this in NCL
 sed -e "s|^\(  set cpp = \)/lib/cpp$|\1${PREFIX}/bin/cpp|g" -i.backup config/ymake
 
@@ -40,8 +38,6 @@ sed -e "s|\${PREFIX}|${PREFIX}|g" -e "s|\${x11_inc}|${x11_inc}|g" -e "s|\${x11_l
 sed -e "s|^\(SUBDIRS = blas lapack sphere3.1_dp  fftpack5_dp\)$|\1 $G2CLIB|g" -i.backup external/yMakefile
 
 sed -e "s|^INC=-I/usr/local/include.*$|INC=-I$PREFIX/include/|g" -i.backup external/$G2CLIB/makefile
-
-sed -e "|bin/ESMF_RegridWeightGen|d" -i.backup install/make-tarfile/check_files
 
 echo -e '
 install:
